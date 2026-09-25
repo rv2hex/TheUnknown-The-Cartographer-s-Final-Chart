@@ -1,0 +1,134 @@
+[gd_scene format=3 uid="uid://cryqpfag0kb6s"]
+
+[ext_resource type="Script" uid="uid://brhfbo2l6c58g" path="res://main.gd" id="1_main"]
+[ext_resource type="PackedScene" uid="uid://ignpdv10rx52" path="res://addons/boujie_water_shader/prefabs/deep_ocean.tscn" id="2_ocean"]
+[ext_resource type="Script" uid="uid://bio1hvm2cry2y" path="res://boat.gd" id="3_boat"]
+[ext_resource type="Script" uid="uid://c6s1jaqu8nbu0" path="res://day_night_cycle.gd" id="4_cycle"]
+[ext_resource type="Script" uid="uid://cgm6a0vpo7jal" path="res://addons/starlight/StarGenerator.gd" id="5_stars"]
+[ext_resource type="Script" uid="uid://0unkruhqq16u" path="res://addons/boujie_water_shader/types/camera_follower_3d.gd" id="6_follow"]
+[ext_resource type="Shader" uid="uid://cyinwncndvqqc" path="res://addons/starlight/Star.gdshader" id="7_starshader"]
+[ext_resource type="Texture2D" uid="uid://b35p7vpvmdcsb" path="res://addons/starlight/psf-textures/jwst.png" id="8_psf"]
+[ext_resource type="PackedScene" uid="uid://3poom1dqdbd8" path="res://models/dutch_ship/dutch_ship_medium_4k.gltf" id="9_ship"]
+[ext_resource type="Script" uid="uid://b66yk8v8uc4mu" path="res://islands.gd" id="10_islands"]
+[ext_resource type="Script" uid="uid://bjmmbnlye4rtr" path="res://hud.gd" id="11_hud"]
+[ext_resource type="Script" uid="uid://c8v614f3pkp7g" path="res://mobs.gd" id="13_mobs"]
+[ext_resource type="Script" uid="uid://degwv2k7pj24g" path="res://crab.gd" id="14_crab"]
+[ext_resource type="Script" uid="uid://coyyuln0ocj5i" path="res://menu.gd" id="15_menu"]
+[ext_resource type="Script" uid="uid://bipbbi6wq5c0j" path="res://quest.gd" id="16_quest"]
+[ext_resource type="Script" uid="uid://dnbb0pkm0kbtl" path="res://story.gd" id="17_story"]
+[ext_resource type="PackedScene" uid="uid://b14xm34ilws7d" path="res://models/crab_mountain/scene.gltf" id="17_crabmodel"]
+
+[sub_resource type="ProceduralSkyMaterial" id="SkyMat_1"]
+sky_top_color = Color(0.25, 0.5, 0.9, 1)
+sky_horizon_color = Color(0.7, 0.85, 0.95, 1)
+ground_bottom_color = Color(0.05, 0.1, 0.2, 1)
+ground_horizon_color = Color(0.6, 0.75, 0.85, 1)
+
+[sub_resource type="Sky" id="Sky_1"]
+sky_material = SubResource("SkyMat_1")
+
+[sub_resource type="Environment" id="Env_1"]
+background_mode = 2
+sky = SubResource("Sky_1")
+ambient_light_source = 3
+tonemap_mode = 2
+
+[sub_resource type="BoxShape3D" id="HullShape"]
+size = Vector3(5.5, 8, 22)
+
+[node name="Main" type="Node3D" unique_id=1096749106]
+script = ExtResource("1_main")
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=695527197]
+transform = Transform3D(0.877037, -0.278375, 0.391552, 0, 0.815017, 0.579437, -0.480422, -0.508188, 0.7148, 0, 30, 0)
+light_energy = 1.2
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=337269981]
+environment = SubResource("Env_1")
+
+[node name="DeepOcean" parent="." unique_id=1751336047 instance=ExtResource("2_ocean")]
+levels_of_detail = 3
+far_edge = 2000
+
+[node name="Boat" type="RigidBody3D" parent="." unique_id=1708691268]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -123.8, 3, 150)
+mass = 800.0
+script = ExtResource("3_boat")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boat" unique_id=523957922]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("HullShape")
+
+[node name="ShipModel" parent="Boat" unique_id=2108970418 instance=ExtResource("9_ship")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Backlamp" type="OmniLight3D" parent="Boat" unique_id=2088085948]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5783596, 10.12709)
+light_color = Color(1, 0.7, 0.4, 1)
+light_energy = 2.5
+omni_range = 22.0
+
+[node name="FrontLamp" type="SpotLight3D" parent="Boat" unique_id=1872825115]
+transform = Transform3D(1, 0, 0, 0, 0.92319965, 0.38432044, 0, -0.38432044, 0.92319965, 0, 10.2776, -6.045334)
+light_color = Color(1, 0.82, 0.6, 1)
+light_energy = 16.0
+light_indirect_energy = 4.594
+spot_range = 91.11721
+spot_attenuation = 1.2
+spot_angle = 33.316154
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=865705264]
+transform = Transform3D(1, 0, 0, 0, 0.9, 0.43, 0, -0.43, 0.9, 0, 8, 13)
+far = 2000.0
+
+[node name="AudioListener3D" type="AudioListener3D" parent="Camera3D" unique_id=1231755414]
+
+[node name="Stars" type="Node3D" parent="." unique_id=56813311]
+script = ExtResource("5_stars")
+size = 1500.0
+star_count = 8000
+shader = ExtResource("7_starshader")
+shader_params/texture_emission = ExtResource("8_psf")
+shader_params/texture_emission_tint = Vector3(0.252, 0.157, 0.292)
+shader_params/blur_amount = 0.5
+shader_params/emission_energy = 20000000000.0
+shader_params/billboard_size_deg = 16.0
+shader_params/luminosity_cap = 4000000.0
+shader_params/meters_per_lightyear = 100.0
+shader_params/color_gamma = 3.0
+shader_params/texture_gamma = 1000.0
+shader_params/clamp_output = false
+shader_params/min_size_ratio = 0.03
+shader_params/max_luminosity = 8000.0
+shader_params/scaling_gamma = 0.45
+shader_params/debug_show_rects = false
+
+[node name="StarsFollower" type="Node3D" parent="." unique_id=1445456656]
+script = ExtResource("6_follow")
+target_path = NodePath("../Stars")
+
+[node name="DayNightCycle" type="Node" parent="." unique_id=1723523430]
+script = ExtResource("4_cycle")
+
+[node name="WorldIslands" type="Node3D" parent="." unique_id=1221976005]
+script = ExtResource("10_islands")
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=794558228]
+script = ExtResource("11_hud")
+
+[node name="Mobs" type="Node3D" parent="." unique_id=713870167]
+script = ExtResource("13_mobs")
+
+[node name="Crab" parent="." unique_id=371152508 instance=ExtResource("17_crabmodel")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+script = ExtResource("14_crab")
+
+[node name="Menu" type="CanvasLayer" parent="." unique_id=1032294040]
+script = ExtResource("15_menu")
+
+[node name="Quest" type="Node" parent="." unique_id=1664243008]
+script = ExtResource("16_quest")
+
+[node name="Story" type="CanvasLayer" parent="."]
+script = ExtResource("17_story")

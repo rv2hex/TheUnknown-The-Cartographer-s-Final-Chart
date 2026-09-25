@@ -1,0 +1,9 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# Editor / OS junk (builds/ is intentionally TRACKED via Git LFS, do not ignore)
+*.tmp
+*~
+.DS_Store
+Thumbs.db
