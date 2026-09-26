@@ -1,0 +1,11 @@
+Model Information:
+* title:	Crab mountain
+* source:	https://sketchfab.com/3d-models/crab-mountain-ac8fa79586f84c84a8a55dd86b7a2e2f
+* author:	pro100voron (https://sketchfab.com/pro100voron)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Crab mountain" (https://sketchfab.com/3d-models/crab-mountain-ac8fa79586f84c84a8a55dd86b7a2e2f) by pro100voron (https://sketchfab.com/pro100voron) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
