@@ -7,6 +7,12 @@ voyage. Boots on a start screen, ends with the Nobel — and the Embrace.
 - Engine: Godot 4.7 (Mobile renderer), Jolt Physics
 - Main scene: `main.tscn` (`main.gd` orbit camera + `boat.gd` hull)
 
+![sailing at dusk](assets/Screenshot_20260925_211924.png)
+![moonlit sailing](assets/Screenshot_20260926_161102.png)
+![red moon night](assets/Screenshot_20260925_211756.png)
+
+Watch 58 s of gameplay (with sound): [assets/gameplay.mp4](assets/gameplay.mp4)
+
 ## Story
 
 Seven fullscreen story cards (`story.gd`, Space to continue, pausing the world):
@@ -20,6 +26,8 @@ Seven fullscreen story cards (`story.gd`, Space to continue, pausing the world):
 7. `ending` — the Nobel, then the Kraken's Embrace
 
 Crew: Axiom, Elara, Silas, Finn, Kael — later Evelyn.
+
+![story card: Iron Gull cast-off](assets/Screenshot_20260926_161241.png)
 
 ## Objective: Chart the Reach (`quest.gd`)
 
@@ -45,6 +53,8 @@ chart (`map_view.gd`, calibrated onto `assets/unseen_reach_map.png`).
   director sends one diver at a time (15 dmg strike, every 4th dive grabs and
   drowns). Kill the lamps (`L`) or leave the 300 m leash to stand them down.
   A shy whale circles and sings; distant ocean voices drift past. No damage.
+
+  ![Jellyfish Valley warning](assets/Screenshot_20260924_011916.png)
 - **Crab Reef** (`crab.gd`): sleeps until the ship closes to 260 m, rears over
   6 s. **Hold still** (under 1.5 m/s) and it sinks back, gone for the session.
   Move and the kill-wave lands (lethal + 60000 shove). Fleeing past 700 m also
@@ -90,8 +100,15 @@ TheUnknown/
 ## Run from source
 
 1. Install Godot 4.7 with the Jolt Physics module (project uses Jolt).
-2. Open `project.godot` in the editor, run `main.tscn`.
+2. Clone the repo and open `project.godot` in the editor. All referenced
+   models and sounds are committed, so the first open re-imports everything
+   (~1–2 min) and then `main.tscn` runs with F5.
 3. Export templates required only for building (see next section).
+
+Excluded from the repo on purpose (~60M, referenced by nothing): the
+`models/dolphin/` set, the `ocean_buoy_4k.gltf/` set, `sounds/dolphin_call.wav`
+and `sounds/crab_monster.mp3` (see `.gitignore`). Exports built from this repo
+are leaner by that amount with zero functional difference.
 
 ## Export your own
 
@@ -134,9 +151,11 @@ story.gd                   7 story beats
 day_night_cycle.gd         20-min inverted-JoJo palette, red moon, stars
 addons/boujie_water_shader water surface
 addons/starlight           starfield (JWST PSF texture)
-models/                    dutch_ship, crab_mountain, jellyfish, dolphin
-sounds/                    ocean, whale, dolphin, jelly, crab, menu music
-assets/unseen_reach_map.png  painted chart background
+models/                    dutch_ship, crab_mountain, jellyfish (all referenced)
+sounds/                    ocean, whale, diving whales, dolphin scream,
+                           jellyfish, crab roar, menu music (all referenced)
+assets/                    unseen_reach_map.png (painted chart background),
+                           screenshots + gameplay.mp4 (README media only)
 example/                   water-shader example waves (reference only)
 ```
 
@@ -159,8 +178,8 @@ example/                   water-shader example waves (reference only)
 - Water: `addons/boujie_water_shader` (see its `LICENSE.md` / `README.md`)
 - Stars: `addons/starlight` + `psf-textures/jwst.png`
 - Ship: `models/dutch_ship/` · Crab: `models/crab_mountain/` (see its
-  `license.txt`) · Jellyfish, dolphin: `models/` · Buoy: `ocean_buoy_4k.gltf/`
-- Audio: `sounds/` (ocean waves, whale, diving whales, dolphin scream,
+  `license.txt`) · Jellyfish: `models/jellyfish/`
+- Audio: `sounds/` (ocean waves, whale call, diving whales, dolphin scream,
   jellyfish, crab roar, menu music)
 
 ## Known issues
