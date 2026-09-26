@@ -7,3 +7,10 @@
 *~
 .DS_Store
 Thumbs.db
+
+# Unreferenced assets (verified: nothing in *.gd/*.tscn loads these).
+# Kept on disk for the local export build, excluded from the repo to save ~60M.
+models/dolphin/
+ocean_buoy_4k.gltf/
+sounds/dolphin_call.wav*
+sounds/crab_monster.mp3*
